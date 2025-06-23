@@ -1,26 +1,11 @@
-resource "github_repository" "gh_reassign_reviewer" {
-  name        = "gh-reassign-reviewer"
-  description = "GitHub CLI extension that allows you to easily re-request reviews"
-  visibility  = "public"
+module "gh_reassign_reviewer" {
+  source = "../modules/github-repository"
 
-  # Merge settings
-  allow_squash_merge     = true
-  allow_merge_commit     = false
-  allow_rebase_merge     = false
-  allow_update_branch    = true
-  delete_branch_on_merge = true
+  repository_name        = "gh-reassign-reviewer"
+  repository_description = "GitHub CLI extension that allows you to easily re-request reviews"
+  repository_visibility  = "public"
+  topics                 = ["go", "cli", "golang", "github", "gh-extension"]
 
-  # Features
-  has_issues   = true
-  topics       = ["cli", "gh-extension", "github", "go", "golang"]
-
-  # Security
-  security_and_analysis {
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-  }
+  # 個別設定
+  allow_merge_commit = false
 }

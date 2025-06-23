@@ -1,0 +1,93 @@
+[tools]
+terraform = "latest"
+
+# Basic Terraform commands
+[tasks.validate]
+description = "Validate Terraform configuration files"
+run = "terraform validate"
+
+[tasks.fmt]
+description = "Format Terraform configuration files"
+run = "terraform fmt -recursive"
+
+[tasks.fmt-check]
+description = "Check if Terraform files are properly formatted"
+run = "terraform fmt -check -recursive"
+
+# Planning
+[tasks.plan]
+description = "Create an execution plan"
+run = "terraform plan -var-file=secrets.tfvars"
+
+[tasks.plan-detailed]
+description = "Create execution plan with detailed exit codes"
+run = "terraform plan -var-file=secrets.tfvars -detailed-exitcode"
+
+# Apply
+[tasks.apply]
+description = "Apply Terraform configuration changes"
+run = "terraform apply -var-file=secrets.tfvars"
+
+[tasks.apply-auto]
+description = "Apply changes automatically without confirmation"
+run = "terraform apply -var-file=secrets.tfvars -auto-approve"
+
+# State management
+[tasks.state-list]
+description = "List resources in Terraform state"
+run = "terraform state list"
+
+[tasks.state-show]
+description = "Show attributes of a resource in state"
+run = "terraform state show"
+
+[tasks.refresh]
+description = "Update state to match remote systems"
+run = "terraform refresh -var-file=secrets.tfvars"
+
+# Output
+[tasks.output]
+description = "Show output values from configuration"
+run = "terraform output"
+
+[tasks.output-json]
+description = "Show output values in JSON format"
+run = "terraform output -json"
+
+# Setup (first run)
+[tasks.setup]
+description = "Initial project setup (create secrets.tfvars and initialize)"
+run = """
+echo "Running initial setup..."
+if [ ! -f secrets.tfvars ]; then
+  echo "Creating secrets.tfvars..."
+  cp secrets.tfvars.example secrets.tfvars
+  echo "Please configure secrets.tfvars with actual values and run again"
+  exit 1
+fi
+terraform init
+terraform validate
+echo "Setup complete!"
+"""
+
+# Cleanup
+[tasks.clean]
+description = "Clean up Terraform temporary files and state"
+run = """
+echo "Cleaning up..."
+rm -rf .terraform/
+rm -f .terraform.lock.hcl
+rm -f terraform.tfstate*
+echo "Cleanup complete"
+"""
+
+[tasks.import]
+description = "Generate configuration for existing resources"
+run = [
+  "rm -f generated.tf",
+  "terraform plan -var-file=secrets.tfvars -generate-config-out=generated.tf"
+]
+
+[tasks.import-preview]
+description = "Preview import plan"
+run = "terraform plan  -var-file=secrets.tfvars -var-file=secrets.tfvars"
