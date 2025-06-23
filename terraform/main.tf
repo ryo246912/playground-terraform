@@ -9,3 +9,15 @@ module "gh_reassign_reviewer" {
   # 個別設定
   allow_merge_commit = false
 }
+
+module "config" {
+  source = "../modules/github-repository"
+
+  repository_name        = "config"
+  repository_description = ""
+  repository_visibility  = "public"
+  topics                 = []
+
+  # 個別設定
+  allow_merge_commit = false
+}
