@@ -14,6 +14,6 @@ import {
 
 # Import existing GitHub repository rulesets (using module references)
 import {
-  to = module.gh_reassign_reviewer.github_repository_ruleset.repository_ruleset[0]
+  to = module.gh_reassign_reviewer_ruleset.github_repository_ruleset.repository_ruleset
   id = "gh-reassign-reviewer:5927378"
 }

@@ -1,3 +1,4 @@
+# Repository modules
 module "gh_reassign_reviewer" {
   source = "../modules/github-repository"
 
@@ -20,4 +21,17 @@ module "config" {
 
   # 個別設定
   allow_merge_commit = false
+}
+
+# Ruleset modules
+module "gh_reassign_reviewer_ruleset" {
+  source = "../modules/github-ruleset"
+
+  repository_name = module.gh_reassign_reviewer.repository_name
+}
+
+module "config_ruleset" {
+  source = "../modules/github-ruleset"
+
+  repository_name = module.config.repository_name
 }
