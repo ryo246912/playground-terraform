@@ -1,0 +1,15 @@
+[tools]
+terraform = "latest"
+
+# Basic Terraform commands
+[tasks.validate]
+description = "Validate Terraform configuration files"
+run = "terraform validate"
+
+[tasks.fmt]
+description = "Format Terraform configuration files"
+run = "terraform fmt -recursive"
+
+[tasks.fmt-check]
+description = "Check if Terraform files are properly formatted"
+run = "terraform fmt -check -recursive"
