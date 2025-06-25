@@ -1,6 +1,6 @@
 # Repository reference
 variable "repository_name" {
-  type        = string
+  type = string
 }
 
 # Ruleset settings

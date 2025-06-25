@@ -12,15 +12,13 @@ resource "github_repository_ruleset" "repository_ruleset" {
   }
 
   rules {
-    # Restrict creations
-    creation                      = false
-    # Restrict deletions
-    deletion                      = var.ruleset_prevent_deletion
+
+    creation                      = false                        # Restrict creations
+    deletion                      = var.ruleset_prevent_deletion # Restrict deletions
     non_fast_forward              = true
     required_linear_history       = false
     required_signatures           = false
-    # Restrict updates
-    update                        = var.ruleset_allow_update
+    update                        = var.ruleset_allow_update # Restrict updates
     update_allows_fetch_and_merge = false
 
     pull_request {
