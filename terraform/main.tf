@@ -27,11 +27,13 @@ module "config" {
 module "gh_reassign_reviewer_ruleset" {
   source = "../modules/github-ruleset"
 
-  repository_name = module.gh_reassign_reviewer.repository_name
+  ruleset_enforcement = "disabled" # rule自体は無効化にする
+  repository_name     = module.gh_reassign_reviewer.repository_name
 }
 
 module "config_ruleset" {
   source = "../modules/github-ruleset"
 
-  repository_name = module.config.repository_name
+  ruleset_enforcement = "disabled" # rule自体は無効化にする
+  repository_name     = module.config.repository_name
 }
