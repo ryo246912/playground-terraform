@@ -23,15 +23,36 @@ module "config" {
   allow_merge_commit = false
 }
 
+module "zenn-content" {
+  source = "../modules/github-repository"
+
+  repository_name        = "zenn-content"
+  repository_description = ""
+  repository_visibility  = "public"
+  topics                 = []
+
+  # 個別設定
+  allow_merge_commit = false
+}
+
 # Ruleset modules
 module "gh_reassign_reviewer_ruleset" {
   source = "../modules/github-ruleset"
 
-  repository_name = module.gh_reassign_reviewer.repository_name
+  ruleset_enforcement = "disabled" # rule自体は無効化にする
+  repository_name     = module.gh_reassign_reviewer.repository_name
 }
 
 module "config_ruleset" {
   source = "../modules/github-ruleset"
 
-  repository_name = module.config.repository_name
+  ruleset_enforcement = "disabled" # rule自体は無効化にする
+  repository_name     = module.config.repository_name
+}
+
+module "zenn-content_ruleset" {
+  source = "../modules/github-ruleset"
+
+  ruleset_enforcement = "disabled" # rule自体は無効化にする
+  repository_name     = module.zenn-content.repository_name
 }

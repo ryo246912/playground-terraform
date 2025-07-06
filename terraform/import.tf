@@ -12,6 +12,10 @@ import {
   id = "config"
 }
 
+import {
+  to = module.zenn-content.github_repository.repository
+  id = "zenn-content"
+}
 # Import existing GitHub repository rulesets (using module references)
 import {
   to = module.gh_reassign_reviewer_ruleset.github_repository_ruleset.repository_ruleset
